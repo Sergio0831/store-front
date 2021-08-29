@@ -2,21 +2,20 @@ import React, { useEffect, useState, useContext } from "react";
 import Product from "./Product";
 import Loader from "./Loader";
 import { AppContext } from "./AppContext";
+import useFetch from "./useFetch";
 
 const StoreFront = () => {
   const [products, setProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const { get, loading } = useFetch(
+    "https://react-tutorial-demo.firebaseio.com/"
+  );
 
   useEffect(() => {
-    fetch("https://react-tutorial-demo.firebaseio.com/products.json")
-      .then((response) => response.json())
+    get("products.json")
       .then((data) => {
         setProducts(data);
       })
-      .catch((error) => console.log(error))
-      .finally(() => {
-        setIsLoading(false);
-      });
+      .catch((error) => console.log(error));
   }, []);
 
   const { currency } = useContext(AppContext);
@@ -25,7 +24,7 @@ const StoreFront = () => {
     <>
       <p>Shopping in {currency}</p>
       <div className='store-front'>
-        {isLoading && <Loader />}
+        {loading && <Loader />}
         {products.map((product) => (
           <Product key={product.id} details={product} />
         ))}

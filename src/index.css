@@ -6,11 +6,17 @@
 }
 
 body {
-  margin: 0;
+  margin: 30px;
 }
 
-#react-root > div {
+#root > div {
   padding: 30px;
+}
+
+#root a {
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
 }
 
 .btn {
@@ -44,7 +50,8 @@ body {
 .store-front {
   display: grid;
   grid-gap: 30px;
-  grid-template-columns: 1fr 1fr;
+  margin-bottom: 20px;
+  max-width: 500px;
 }
 
 .product {
@@ -54,6 +61,12 @@ body {
   grid-template-columns: auto 1fr auto;
   align-items: center;
 }
+
+.product-info {
+  color: #00b99f;
+  transition: transform 150ms ease-out;
+}
+
 .product img {
   padding: 10px 20px 10px 10px;
 }
