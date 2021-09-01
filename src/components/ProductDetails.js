@@ -1,11 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import {
+  Link,
+  Route,
+  Switch,
+  useParams,
+  useRouteMatch
+} from "react-router-dom";
 import Loader from "./Loader";
+import ProductDelivery from "./ProductDelivery";
 import useFetch from "./useFetch";
 
 const ProductDetails = () => {
   const [product, setProduct] = useState([]);
   const params = useParams();
+  const match = useRouteMatch();
   const id = params.id;
   const { get, loading } = useFetch(
     "https://react-tutorial-demo.firebaseio.com/"
@@ -29,8 +37,17 @@ const ProductDetails = () => {
           <p>{product.description}</p>
           <h3>${product.price}</h3>
           <img src={product.image} width='100' alt={product.name} />
+          <p>
+            View <Link to={`${match.url}/delivery`}>delivery notes</Link>
+          </p>
         </div>
       )}
+
+      <Switch>
+        <Route path={`${match.path}/delivery`}>
+          <ProductDelivery />
+        </Route>
+      </Switch>
     </>
   );
 };

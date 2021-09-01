@@ -5,6 +5,10 @@
   --dark: #222;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 30px;
 }
@@ -17,6 +21,38 @@ body {
   text-decoration: none;
   display: inline-block;
   text-align: center;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+}
+
+a {
+  color: var(--primary);
+  display: inline-block;
+}
+
+img {
+  box-sizing: content-box;
+}
+
+header {
+  display: flex;
+  height: 60px;
+  align-items: center;
+}
+
+.nav .nav--active {
+  font-weight: bold;
+}
+
+.nav .nav__list {
+  display: flex;
+}
+
+.nav__list-item:not(:last-child) {
+  margin-right: 10px;
 }
 
 .btn {

@@ -4,7 +4,7 @@ import React, { createContext, useState } from "react";
 const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState("light");
   const [currency, setCurrency] = useState("USD");
 
   const toggleTheme = () => {
