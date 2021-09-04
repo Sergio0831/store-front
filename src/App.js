@@ -1,41 +1,27 @@
-import React, { useContext } from "react";
-import StoreFront from "./components/StoreFront";
-import Navbar from "./components/Navbar";
-import { AppContext } from "./components/AppContext";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import ProductDetails from "./components/ProductDetails";
-import NotFound from "./components/404";
-import About from "./components/About";
-import Home from "./components/Home";
+import React from "react";
+import Button from "./components/Button";
 
 const App = () => {
-  const { theme } = useContext(AppContext);
+  const handleButtonClick = () => {
+    console.log("Hello");
+  };
 
   return (
-    <BrowserRouter>
-      <div className={theme === "dark" ? "dark" : ""}>
-        <Navbar />
-        <main>
-          <Switch>
-            <Route exact path='/'>
-              <Home />
-            </Route>
-            <Route exact path='/about'>
-              <About />
-            </Route>
-            <Route exact path='/products'>
-              <StoreFront />
-            </Route>
-            <Route path='/products/:id'>
-              <ProductDetails />
-            </Route>
-            <Route>
-              <NotFound />
-            </Route>
-          </Switch>
-        </main>
-      </div>
-    </BrowserRouter>
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "20px",
+        flexWrap: "wrap",
+        justifyContent: "center"
+      }}
+    >
+      <Button>Normal</Button>
+      <Button outline>Outline</Button>
+      <Button className='extra-class btn' onClick={handleButtonClick}>
+        Customizable
+      </Button>
+    </div>
   );
 };
 
