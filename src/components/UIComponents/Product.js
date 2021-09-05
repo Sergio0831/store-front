@@ -1,17 +1,20 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Button from "../UIComponents/Button";
 
-const Product = ({ id, name, description, price, image }) => {
+const Product = ({ id, name, description, price, image, slug }) => {
   return (
     <div className='product'>
       <div className='product-image-container'>
-        <img
-          width='100'
-          height='100'
-          className='product-image'
-          alt={name}
-          src={image}
-        />
+        <Link to={`/products/${slug}`}>
+          <img
+            width='100'
+            height='100'
+            className='product-image'
+            alt={name}
+            src={image}
+          />
+        </Link>
         <div className='product-quantity-container'>
           <div className='product-quantity'>0</div>
         </div>

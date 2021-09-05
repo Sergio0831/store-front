@@ -5,6 +5,7 @@ import About from "./components/Pages/About";
 import Cart from "./components/Pages/Cart";
 import Home from "./components/Pages/Home";
 import Products from "./components/Pages/Products";
+import ProductDetails from "./components/Pages/ProductDetails";
 
 const App = () => {
   return (
@@ -15,13 +16,16 @@ const App = () => {
           <Route exact path='/'>
             <Home />
           </Route>
-          <Route path='/about'>
+          <Route exact path='/about'>
             <About />
           </Route>
-          <Route path='/products'>
+          <Route exact path='/products'>
             <Products />
           </Route>
-          <Route path='/cart'>
+          <Route path='/products/:slug'>
+            <ProductDetails />
+          </Route>
+          <Route exact path='/cart'>
             <Cart />
           </Route>
         </Switch>

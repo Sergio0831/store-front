@@ -35,14 +35,16 @@ const Products = () => {
       <div className='products-grid'>
         {products &&
           products.map((product) => {
-            const { id, name, description, image, price } = product;
+            const { id, name, description, image, price, slug } = product;
             return (
               <Product
                 key={id}
+                id={id}
                 name={name}
                 description={description}
                 image={image}
                 price={price}
+                slug={slug}
               />
             );
           })}
