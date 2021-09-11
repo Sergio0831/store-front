@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import NavBar from "./components/Layout/NavBar";
 import About from "./components/Pages/About";
@@ -8,7 +8,20 @@ import Products from "./components/Pages/Products";
 import ProductDetails from "./components/Pages/ProductDetails";
 
 const App = () => {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => {
+    let savedCart = [];
+    try {
+      savedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    } catch (error) {
+      savedCart = [];
+    }
+
+    return savedCart;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   const handleProductAdd = (newProduct) => {
     const existingProduct = cart.find(
