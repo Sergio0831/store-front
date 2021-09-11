@@ -2,7 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Button from "../UIComponents/Button";
 
-const Product = ({ id, name, description, price, image, slug }) => {
+const Product = ({ product, cart, onProductAdd, onProductDelete }) => {
+  const { id, name, description, price, image, slug } = product;
+
+  const productFromCart = cart.find((item) => item.id === product.id);
+  const quantity = productFromCart ? productFromCart.quantity : 0;
+
   return (
     <div className='product'>
       <div className='product-image-container'>
@@ -16,7 +21,7 @@ const Product = ({ id, name, description, price, image, slug }) => {
           />
         </Link>
         <div className='product-quantity-container'>
-          <div className='product-quantity'>0</div>
+          {quantity > 0 && <div className='product-quantity'>{quantity}</div>}
         </div>
       </div>
       <div className='product-info'>
@@ -25,11 +30,17 @@ const Product = ({ id, name, description, price, image, slug }) => {
       </div>
       <div className='product-checkout'>
         <div>
-          <Button className='product-delete' outline>
-            x
-          </Button>
+          {quantity > 0 && (
+            <Button
+              onClick={() => onProductDelete(id)}
+              className='product-delete'
+              outline
+            >
+              x
+            </Button>
+          )}
         </div>
-        <Button outline className>
+        <Button outline className onClick={() => onProductAdd(product)}>
           &euro;{price}
         </Button>
       </div>

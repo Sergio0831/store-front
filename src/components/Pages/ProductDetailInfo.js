@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../UIComponents/Button";
 
-const ProductDetailInfo = () => {
+const ProductDetailInfo = ({ onProductAdd }) => {
   return (
     <>
       <p>

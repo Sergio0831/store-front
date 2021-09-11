@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Loader from "../UIComponents/Loader";
 import Product from "../UIComponents/Product";
 
-const Products = () => {
+const Products = ({ cart = [], onProductAdd, onProductDelete }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
@@ -35,16 +35,13 @@ const Products = () => {
       <div className='products-grid'>
         {products &&
           products.map((product) => {
-            const { id, name, description, image, price, slug } = product;
             return (
               <Product
-                key={id}
-                id={id}
-                name={name}
-                description={description}
-                image={image}
-                price={price}
-                slug={slug}
+                key={product.id}
+                product={product}
+                cart={cart}
+                onProductAdd={onProductAdd}
+                onProductDelete={onProductDelete}
               />
             );
           })}

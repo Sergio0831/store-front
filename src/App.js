@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import NavBar from "./components/Layout/NavBar";
 import About from "./components/Pages/About";
@@ -8,9 +8,34 @@ import Products from "./components/Pages/Products";
 import ProductDetails from "./components/Pages/ProductDetails";
 
 const App = () => {
+  const [cart, setCart] = useState([]);
+
+  const handleProductAdd = (newProduct) => {
+    const existingProduct = cart.find(
+      (product) => product.id === newProduct.id
+    );
+
+    if (existingProduct) {
+      const updatedProduct = cart.map((product) => {
+        if (product.id === newProduct.id) {
+          return { ...product, quantity: product.quantity + 1 };
+        }
+        return product;
+      });
+      setCart(updatedProduct);
+    } else {
+      setCart([...cart, { ...newProduct, quantity: 1 }]);
+    }
+  };
+
+  const handleProductDelete = (id) => {
+    const updaedCart = cart.filter((product) => product.id !== id);
+    setCart(updaedCart);
+  };
+
   return (
     <BrowserRouter>
-      <NavBar />
+      <NavBar cart={cart} />
       <div className='container'>
         <Switch>
           <Route exact path='/'>
@@ -20,13 +45,17 @@ const App = () => {
             <About />
           </Route>
           <Route exact path='/products'>
-            <Products />
+            <Products
+              cart={cart}
+              onProductAdd={handleProductAdd}
+              onProductDelete={handleProductDelete}
+            />
           </Route>
           <Route path='/products/:slug'>
-            <ProductDetails />
+            <ProductDetails onProductAdd={handleProductAdd} />
           </Route>
           <Route exact path='/cart'>
-            <Cart />
+            <Cart cart={cart} />
           </Route>
         </Switch>
       </div>
