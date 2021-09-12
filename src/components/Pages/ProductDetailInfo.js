@@ -7,6 +7,7 @@ const ProductDetailInfo = ({ onProductAdd }) => {
       <p>
         DESCRIPTION sold at <strong>$PRICE</strong> per piece.
       </p>
+
       <Button>$PRICE</Button>
     </>
   );
