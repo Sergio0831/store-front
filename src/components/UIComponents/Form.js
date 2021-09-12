@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import Button from "./Button";
 import Input from "./Input";
+import { AppContext } from "../Context/AppContext";
 
-const Form = ({ cart, setCart }) => {
+const Form = () => {
   const [email, setEmail] = useState("");
+  const app = useContext(AppContext);
+  const { cart } = app;
+
   const stripeLoadedPromise = loadStripe(
     process.env.REACT_APP_STRIPE_PUBLIC_KEY
   );

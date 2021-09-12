@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AppContext } from "../Context/AppContext";
 import Button from "../UIComponents/Button";
 
-const Product = ({ product, cart, onProductAdd, onProductDelete }) => {
+const Product = ({ product }) => {
   const { id, name, description, price, image, slug } = product;
 
-  const productFromCart = cart.find((item) => item.id === product.id);
+  const app = useContext(AppContext);
+  const { onProductAdd, onProductDelete } = app;
+
+  const productFromCart = app.getProductFromCart(product.id);
   const quantity = productFromCart ? productFromCart.quantity : 0;
 
   return (

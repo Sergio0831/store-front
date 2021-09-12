@@ -1,16 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AppContext } from "../Context/AppContext";
 import Form from "../UIComponents/Form";
 
-const Cart = ({ cart, setCart }) => {
-  console.log(cart);
-  const totalCartPrice = cart.reduce((total, product) => {
-    const totalPrice = product.price * product.quantity;
-    total += totalPrice;
-    return total;
-  }, 0);
+const Cart = () => {
+  const app = useContext(AppContext);
+  const { cart } = app;
+  const totalCartPrice = app.getTotalCartPrice();
 
   return (
     <div className='cart-layout'>
+      <h1>Your Cart</h1>
       {cart.length === 0 ? (
         <p>You have not added any product to your cart yet.</p>
       ) : (
@@ -53,7 +52,7 @@ const Cart = ({ cart, setCart }) => {
               </tr>
             </tfoot>
           </table>
-          <Form cart={cart} setCart={setCart} />
+          <Form />
         </>
       )}
     </div>

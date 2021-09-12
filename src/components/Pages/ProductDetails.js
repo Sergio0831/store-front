@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Switch, Route, NavLink, useRouteMatch } from "react-router-dom";
 import ProductDetailInfo from "./ProductDetailInfo";
 import ProductDetailNutrition from "./ProductDetailNutrition";
 import ProductDetailStorage from "./ProductDetailStorage";
 
-const ProductDetails = ({ onProductAdd }) => {
+const ProductDetails = () => {
   const { path, url } = useRouteMatch();
 
   return (
@@ -39,12 +39,7 @@ const ProductDetails = ({ onProductAdd }) => {
           </ul>
         </div>
         <Switch>
-          <Route
-            exact
-            path={`${path}`}
-            component={ProductDetailInfo}
-            onProductAdd={onProductAdd}
-          />
+          <Route exact path={`${path}`} component={ProductDetailInfo} />
           <Route
             exact
             path={`${path}/nutrition`}
