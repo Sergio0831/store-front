@@ -37,8 +37,8 @@ const AppProvider = ({ children }) => {
   };
 
   const handleProductDelete = (id) => {
-    const updaedCart = cart.filter((product) => product.id !== id);
-    setCart(updaedCart);
+    const updatedCart = cart.filter((product) => product.id !== id);
+    setCart(updatedCart);
   };
 
   const getTotalQuantity = () => {

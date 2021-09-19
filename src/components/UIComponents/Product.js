@@ -4,12 +4,28 @@ import { AppContext } from "../Context/AppContext";
 import Button from "../UIComponents/Button";
 
 const Product = ({ product }) => {
-  const { id, name, description, price, image, slug } = product;
+  const {
+    sys: { id },
+    fields: {
+      name,
+      description,
+      price,
+      slug,
+      priceId,
+      image: {
+        fields: {
+          file: { url: image }
+        }
+      }
+    }
+  } = product;
+
+  const item = { id, name, description, price, slug, priceId, image };
 
   const app = useContext(AppContext);
   const { onProductAdd, onProductDelete } = app;
 
-  const productFromCart = app.getProductFromCart(product.id);
+  const productFromCart = app.getProductFromCart(id);
   const quantity = productFromCart ? productFromCart.quantity : 0;
 
   return (
@@ -44,7 +60,7 @@ const Product = ({ product }) => {
             </Button>
           )}
         </div>
-        <Button outline className onClick={() => onProductAdd(product)}>
+        <Button outline className onClick={() => onProductAdd(item)}>
           &euro;{price}
         </Button>
       </div>

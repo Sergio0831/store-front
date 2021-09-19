@@ -1,6 +1,7 @@
 import React from "react";
 
-const ProductDetailNutrition = () => {
+const ProductDetailNutrition = ({ nutrition }) => {
+  const { fat, salt, carbs, protein } = nutrition;
   return (
     <table className='table table-nutrition'>
       <thead>
@@ -12,19 +13,19 @@ const ProductDetailNutrition = () => {
       <tbody>
         <tr>
           <td>Protein</td>
-          <td>PROTEINg</td>
+          <td>{protein}g</td>
         </tr>
         <tr>
           <td>Carbohydrates</td>
-          <td>CARBSg</td>
+          <td>{carbs}g</td>
         </tr>
         <tr>
           <td>Fat</td>
-          <td>FATg</td>
+          <td>{fat}g</td>
         </tr>
         <tr>
           <td>Salt</td>
-          <td>SALTg</td>
+          <td>{salt}g</td>
         </tr>
       </tbody>
     </table>

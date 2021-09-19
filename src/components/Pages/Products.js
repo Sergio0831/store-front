@@ -1,41 +1,36 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Loader from "../UIComponents/Loader";
 import Product from "../UIComponents/Product";
-
+import { client } from "../../database/client";
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
-    const loadProducts = async () => {
+    const getProducts = async () => {
       try {
         setLoading(true);
-        const response = await axios(
-          "https://supermarket-d873d-default-rtdb.firebaseio.com/products.json"
-        );
-        setProducts(response.data);
-        setErrorMsg("");
-      } catch (error) {
-        setErrorMsg("Error while loading data. Try again");
-      } finally {
+        const response = await client.getEntries({ content_type: "product" });
+        const products = response.items;
+        setProducts(products);
         setLoading(false);
+      } catch (err) {
+        console.log(err);
       }
     };
-    loadProducts();
+    getProducts();
   }, []);
 
   return (
     <div className='products-layout'>
       {loading && <Loader />}
-      {errorMsg && <p className='error-msg'>{errorMsg}</p>}
       <h1>Products</h1>
       <p>Take a look at our products</p>
       <div className='products-grid'>
         {products &&
           products.map((product) => {
-            return <Product key={product.id} product={product} />;
+            const slug = product.fields.slug;
+            return <Product key={slug} product={product} />;
           })}
       </div>
     </div>

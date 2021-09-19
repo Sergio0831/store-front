@@ -1,9 +1,9 @@
 import React from "react";
 
-const ProductDetailStorage = () => {
+const ProductDetailStorage = ({ storage }) => {
   return (
     <p>
-      <strong>Storage instructions:</strong> STORAGE
+      <strong>Storage instructions:</strong> {storage}
     </p>
   );
 };

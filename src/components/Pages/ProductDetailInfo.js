@@ -2,17 +2,17 @@ import React, { useContext } from "react";
 import Button from "../UIComponents/Button";
 import { AppContext } from "../Context/AppContext";
 
-const ProductDetailInfo = () => {
+const ProductDetailInfo = ({ price, description, item }) => {
   const app = useContext(AppContext);
   const { onProductAdd } = app;
 
   return (
     <>
       <p>
-        DESCRIPTION sold at <strong>$PRICE</strong> per piece.
+        {description} sold at <strong>${price}</strong> per piece.
       </p>
 
-      <Button onClick={onProductAdd}>$PRICE</Button>
+      <Button onClick={() => onProductAdd(item)}>${price}</Button>
     </>
   );
 };

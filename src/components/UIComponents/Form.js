@@ -17,7 +17,7 @@ const Form = () => {
     e.preventDefault();
 
     const lineItems = cart.map((product) => {
-      return { price: product.price_id, quantity: product.quantity };
+      return { price: product.priceId, quantity: product.quantity };
     });
 
     stripeLoadedPromise
@@ -41,6 +41,11 @@ const Form = () => {
       <p>
         Enter your email and then click on pay and your products will be
         delivered to you on the same day!
+      </p>
+      <p>
+        Use the test card number <strong>4242 4242 4242 4242</strong>, a random
+        three-digit CVC number, and any expiration date in the future. <br />
+        And any email.
       </p>
       <Input
         autoComplete='email'
